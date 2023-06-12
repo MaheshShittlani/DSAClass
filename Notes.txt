@@ -1,0 +1,289 @@
+Data Structure & Algorightm
+-----------------------------------
+
+1. Data -> Raw Fact & Figure
+2. Data Storage -> Memory (RAM)
+    How To Store?
+    -----------------  
+        1. Retrieval -> Efficient & Fast
+3. Primitive Data
+    Data type -> Laguage supported data type
+        - It helps to consume data from user and convert it into binary format
+        - Similary while reading data data type helps us to get data in binary format
+        convert it into user readable format.
+
+    int a = 5;
+        a = 00000000 00000000 00000000 00000101
+
+4. Data types
+    - Primitive Types / Scalar Types / Primary Data Type - Store smallest unit of data
+    - User Defined Types
+        - Array
+        - Stack
+        - Queue
+        - class
+5. In user defined data types, we need to decide how data is store in memory, 
+how to access/ retrieve those data.
+
+6. Data Structure - Deals with the data storage and organization in such a way that
+it can be retrieved fast and Efficiently.
+    1. Linear Data Structure / Sequencial Data Structure
+        1. Array
+        2. Stack
+        3. Queue
+        4. Linked List
+        5. HashTables
+    2. Non-Linear Data Structure
+        1. Tree
+        2. Graph
+
+7. ADT (Abstract Data Type) - Data + opearation are well defined
+-------------------------------
+    - Data
+    - Opeations
+
+    Example:
+    -----------
+        int data type - ADT
+            - Data -> { 99, 88, 77, -987 }
+            - Operation -> addition, subtraction, multiplication
+                            division, module => p / q, then q!=0
+
+    Example:
+        Design an ADT for Circle
+
+    ---------------------------------------
+    Circle
+    ----------------------------------------
+        -radius
+        +Circle()
+        +Circle(radius)
+        +calcArea()
+        +displayArea()
+
+---------------------------------------
+Algorithm
+-------------------
+    Algorithm is a step by step instruction to achieve a desired outcome.
+
+Analysis of Algorithm
+---------------------
+    1. Mulitple solution of a problem is possible. Support Algo A and Algo B 
+    are two solution of a problme. So to decide which one is best neeed to analysis.
+
+    Analysis Method
+    ---------------
+    1. Execution Time - Wrong Way
+    2. Memory Space - Wrong way
+    3. Program size - Wrong way
+
+    Correct way - Observe growth of algo
+    -----------------------------------------
+
+    public int sum(int[] arr) { // 3n + 4
+        int total = 0; // 1
+
+        /**
+            i = 0; // 1
+            i < arr.length; // n + 1
+            i++// n
+            total = total + arr[i]; // n
+
+            totalCount = 1 + n + 1 + n + n => 3n + 2
+        */
+        for(int i = 0; i< arr.length; i++) {  
+            total = total + arr[i]; 
+        }
+        return total; // 1
+    }
+
+
+    public int sum(int[][] arr) {
+        int total = 0;  // 1
+
+        /**
+             i = 0; // 1
+             i < arr.length; n + 1;
+             i++; //n
+             inner loop; n(3n+2)
+
+             totalStep = 1 + 1 + n + 1 + n + n(3n+2) + 1
+                        = 3n^2 + 4n + 4
+        */
+        for(int i = 0 ; i < arr.length; i++ ) { // n
+
+            /**
+                j = 0; // 1
+                j < arr[i].length ; n + 1
+                j++; // n
+                total += arr[i][j]; //n
+
+                totalCount = 3n+2
+            */
+
+
+            for(int j = 0; j < arr[i].length; j++) {
+                total += arr[i];
+            }
+        }
+
+        return total; // 1
+    }
+
+
+Note: With the above examples, we observerd there are two type of growth
+n -> Exectues fast
+n^2 -> Executes slow.
+
+
+Common Growth
+-------------------
+n
+n^2
+n^3
+log(n)
+nlog(n)
+e^x
+2^n
+n!
+----------------------------------
+
+Asympatic Notations
+---------------------
+1. Big Oh O-> Upper Boundry -> Worst Case Complexity
+2. Omega Ω -> Lower Boundry -> Best Case complexity
+3. Theta θ -> Range-> Lower bound to upper bound
+----------------------------------------------
+
+Stack
+-----------
+What is the Stack?
+----------------------
+    Stack is an organization of data in such a way that they can be Accessed in LIFO
+    (LAST IN FIRST OUT) order.
+
+    In Stack addition and deletion of data elements are performed from a single end that is known as top.
+
+Operation on Stack
+----------------------
+    1. Push -> Adding new elements on the top of the stack.
+    2. Pop -> Removing element from the top of the stack.
+    3. Peek / Peep / Stacktop -> Display top element without removing it.
+
+
+Terms of Stack
+--------------------
+    1. Overflow: Addition of new elements when stack is already full.
+    2. Underflow: Removing element from the top of the stack when stack is empty.
+
+Stack Implementation
+------------------------
+    1. Using Array
+    2. Using Linked List
+
+
+Stack ADT
+--------------
+    Stack
+    ----------------------
+        -stk: E[]
+        -top: int
+    -----------------------
+        +push(E e): void
+        +pop(): E
+        +peep(): E
+        +isEmpty(): boolean
+        +isFull(): boolean
+		
+Program: Implement a Stack class
+
+Stack Usage
+----------------
+1. Parenthisis Matching
+2. Function call / Method Call
+	- Method parameter/Local variables are stored in stack.
+3. Experssion Evalution
+
+Polish Notation
+-------------------
+	1. Infix Notation (a + b)
+	2. Prefix Notation / Polish Notation (+ab)
+	3. Postfix Notation / Suffix / Reverse Polish (ab+)
+	
+1. Conversion From Infix to PostFix
+---------------------------
+	1. a + b		=> ab+
+	2. a + b * c	=> abc*+
+	3. a + b * c / d - e + f * g / h - i
+
+
+a + b ^ c ^ d - e ^ f * g / h - i
+a + b ^ c ^ d - (ef^) * g / h - i
+a + b ^ (cd^) - (ef^) * g / h - i
+a + (bcd^^) - (ef^) * g / h - i
+a + (bcd^^) - (ef^g*) / h - i
+a + (bcd^^) - (ef^g*h/) - i
+(abcd^^+) - (ef^g*h/) - i
+(abcd^^+ef^g*h/-) - i
+abcd^^+ef^g*h/-i-
+2. Conversion from infix to prefix
+3. Conversion form postfix/prefix to infix
+
+
+Algorigthm: Parenthisis Matcher
+-------------------------------------
+matcher(exp):
+	1. Scan the exp from Left to write and repeat the following steps
+	for each character or digit of exp.
+		2. Suppose the current is ch. 
+			if ch == '(':
+				push it onto the Stack.
+			else if ch == ')'
+				if(stack.isEmpty())
+					return false;
+					
+				element = stack.pop();
+	3. 	[When scan is complete from Left to write]
+		return stack.isEmpty()
+
+	
+	
+Algorith:InfixToPosfix(in,post)
+--------------------------------
+This algorithm converts infix expression `in` into postfix expression and store it into `post`
+
+1. Scan the infix expression from L To R and apply the steps 2 to 5
+	for each character `ch` of infix expression.
+	
+2. if ch == '(', then:
+	push it onto the stack.
+3. if ch == ')', then:
+	1. Repeatly pop each operator form the stack and append it to `post`
+		until '(' is encountered.
+4. if ch is operator(+,-,*,/,%,^), then:
+	1. Pop all the operator from stack which have the higher or equal 
+	priority to ch and append to `post`.
+	2. push it onto the stack.
+5. if ch is operand, then:
+	append to `post`.
+6. Return
+
+
+Expression Evalution
+------------------------
+EvalutePostfix(postfix,result)
+This algorithm evalutes the postfix expression and store the result into a variable `result`
+
+1. Scan the postfix expression from L to R and follow the steps 2 & 3 
+for each character of postfix expression. Suppose each character is stored in `ch`.
+2. if(ch is operator), then:
+	a)  Pop two operand from the top of the stack. suppose the top operand is stored in variable `a` and next to top is stored in variable `b`.
+	b)  evalute expression b operator a.
+	c) push the result of step(b) onto the stack.
+3. if(ch is operand), then:
+	push it onto the stack.
+4. result = stack.pop()
+5. return
+			
+
+
