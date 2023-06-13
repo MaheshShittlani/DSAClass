@@ -267,7 +267,25 @@ This algorithm converts infix expression `in` into postfix expression and store 
 5. if ch is operand, then:
 	append to `post`.
 6. Return
+------------------------------------
+Algorithm: InToPre(in,pre)
+------------------------------
+This algorithm converts the infix expression `in` into equivalent prefix
+expression and store it into `pre`.
 
+1. Scan infix expression `in` from R to L and apply steps 2 to 5 for each character of infix expression.
+2. if ')' is encountered, then:
+	then push is onto the stack.
+3. if '(' is encountered, then:
+	a) Pop all operator form the top of the stack and append it to `prefix` until ')' is encountered:
+	b) pop the ')'.
+4. if an operator `X` is encountered, then:
+	a) pop all operator from the top of the stack and append it to `prefix` which have greater precedence then `X`.
+	b) push `X` onto the top of the stack.
+5. if an operand is encountered, then:
+	append it to `prefix`.
+6. Reverse `prefix`.
+7. Return.
 
 Expression Evalution
 ------------------------
@@ -284,6 +302,18 @@ for each character of postfix expression. Suppose each character is stored in `c
 	push it onto the stack.
 4. result = stack.pop()
 5. return
-			
+
+------------------------------------
+EvalutePrefix(prefix,result)
+-----------------------------------
+1. Scan the prefix expression from R to L and apply step 2&3 for each character.
+2. if and operand is encountered, then:
+	push it onto the stack.
+3. if an operator `X` is encountered, then:
+	a) pop top tow operand from the stack. suppose first operand is `a` and second operand is `b`.
+	b) Evalute a X b.
+	c) push the result of step(b) onto the stack.
+4. pop the result form the stack and store it into `result`.
+5. Return.
 
 
