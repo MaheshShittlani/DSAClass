@@ -317,3 +317,59 @@ EvalutePrefix(prefix,result)
 5. Return.
 
 
+Recursion
+------------
+1. What is the recursive Function.
+2. What is recursion.
+3. Exercise Questions:
+	1. Program to find the factorial of a number.
+	2. Program to calculate muliplication of two numbers
+	3. Program to compute a to the power b.
+	4. Program to compute the n-th term of fibonicci series.
+	5. Program to compute the GCD of two numbers.
+	7. Program to find the sum of digits of a number.
+	8. Program to find the sum of array elements.
+	9. Program to reverse a string.
+	10. Program to check a string is pelindrom or not.
+	11. Solve Tower of Hanoi
+	12. Program to convert decimal to binary
+	13. Convert decimal to octal
+	14. Convert decimal to hexa decimal
+
+Tower(N,BEG,AUX,END)
+1. if N==1, then: Write BEG->END.
+2. TOWER(N-1,BEG,END,AUX).
+3. Write Nth DISK BEG->END.
+4. TOWER(N-1,AUX,BEG,END).
+5. Return
+
+
+LinkedList
+---------------
+What is the linked list?
+	Linked list is the collection of nodes that are connected to each other.
+What is the Node?
+	Node is piece of memory allocated dynamically. Generally it store
+	data and have a reference(address) for next node.
+Structure of a Node:
+	-data/info
+	-next/link(reference/pointer)
+	
+Linked List Operation
+---------------------------
+1. Creation of linked list
+	1. AddFirst - Add new node at the begining
+	2. Append - Add new node at the end.
+	3. Insert - Insert a node in between.
+		- Sorted List 
+		- Unsorted List
+2. Traversal
+3. Deletion
+	- Delete an item
+	- Delete a position
+4. Merge
+	
+
+	
+	
+	
