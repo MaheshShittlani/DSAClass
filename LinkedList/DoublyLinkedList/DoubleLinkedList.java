@@ -58,7 +58,7 @@ public class DoubleLinkedList {
         Node prev = first;
         Node ptr = first.getNext();
 
-        if(ptr != null) {
+        while(ptr != null) {
             if(item < ptr.getData()) {
                 prev.setNext(newItem);
                 newItem.setPrev(prev);
@@ -77,7 +77,53 @@ public class DoubleLinkedList {
 
     }
 
+    public void deleteItem(int item) {
+        if(first == null) {
+            System.out.println("List is empty");
+            return;
+        }
+        if(item == first.getData() && first == last) {
+            first = null;
+            last = null;
+            return;
+        }
+        if(item == first.getData()) {
+            Node ptr = first;
+            first = first.getNext();
+            ptr.setNext(null);
+            first.setPrev(null);
+            return;
+        }
+
+        Node prev = first;
+        Node ptr = first.getNext();
+
+        while(ptr != null) {
+            if(item == ptr.getData()) {
+                if(ptr == last) {
+                    last = prev;
+                    last.setNext(null);
+                    ptr.setPrev(null);
+                } else {
+                    Node next = ptr.getNext();
+                    prev.setNext(next);
+                    next.setPrev(prev);
+
+                    ptr.setPrev(null);
+                    ptr.setNext(null);
+                }
+                return;
+            }
+            prev = ptr;
+            ptr = ptr.getNext();
+        }
+    }
+
     public void traverse() {
+        if(first == null) {
+            System.out.println("List is empty");
+            return;
+        }
         Node ptr = first;
         while(ptr != null) {
             System.out.print(ptr.getData()+" ");
@@ -87,6 +133,10 @@ public class DoubleLinkedList {
     }
 
     public void reverseTraverse() {
+        if(first == null) {
+            System.out.println("List is empty");
+            return;
+        }
         Node ptr = last;
         while(ptr != null) {
             System.out.print(ptr.getData()+" ");

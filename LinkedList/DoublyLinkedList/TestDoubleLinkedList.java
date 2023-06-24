@@ -8,6 +8,13 @@ public class TestDoubleLinkedList {
         list.insert(5);
         list.insert(25);
         list.insert(40);
+
+        list.deleteItem(5);
+        list.deleteItem(25);
+        list.deleteItem(40);
+        list.deleteItem(10);
+        list.deleteItem(20);
+        list.deleteItem(30);
         
         list.traverse();
         list.reverseTraverse();
