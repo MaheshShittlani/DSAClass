@@ -1,0 +1,152 @@
+Tree is a non linear data structure.
+
+Terminology of tree.
+-----------------------------
+    1. Node
+    2. Root`
+    3. Parent
+    4. Child
+    5. Sibling - Have the same parent
+    6. Leaf / Terminal Node - Don't have any Child.
+    7. Internal Node - Not leaf node
+    8. Edge - The connection or link between two nodes.
+    9. Depth - The depth of a node in a tree is the number of edges from the root node to that particular node.
+    10. Height: The height of a tree is the maximum depth among all the nodes in the tree. It represents the length of the longest path from the root node to any leaf node.
+    11. Subtree: A subtree is a portion of a tree that consists of a node and its descendants, including all their children and further descendants.
+    12. Forest: A forest is a collection of disjoint trees. In other words, it is a set of trees with no common root.
+    Degree: The degree of a node is the number of children it has. A leaf node has a degree of 0, and a node with two children has a degree of 2.
+    13. Ancestor: An ancestor of a node is any node that lies on the path from the root to that node, excluding the node itself.
+    14. Descendant: A descendant of a node is any node reachable by following the edges downward from that node.
+
+
+Types of Tree
+-----------------
+    1. Binary Tree -  A binary tree is a tree in which each node has at most two children.
+        - BST - Binary Search Tree
+        - Balanced Binary Tree: A balanced binary tree is a binary tree in which the heights of the left and right subtrees of any node differ by at most one. 
+            -AVL(Adelson-Velskii and Landis)
+            -Red/Black Tree
+        - Threaded Binary Tree
+        - Full Binary Tree:  In a full binary tree, every node has either zero or two children. This means that every level of the tree is completely filled, except possibly for the last level, which is filled from left to right.
+        - Complete Binary Tree: A complete binary tree is similar to a full binary tree, but it may have missing nodes at the right end of the last level. In a complete binary tree, all levels except the last level are completely filled, and the last level is filled from left to right.
+        -  Perfect Binary Tree: A perfect binary tree is a binary tree in which all interior nodes have two children, and all leaf nodes are at the same level. This means that every level of the tree is completely filled.
+        - Binary Heap: A binary heap is a complete binary tree that satisfies the heap property. In a min-heap, for any node, the value of that node is less than or equal to the values of its children. In a max-heap, the value of each node is greater than or equal to the values of its children. Binary heaps are often used to implement priority queues.
+    General Tree / N-ary Tree - Maximum child N
+    ----------------------------
+        1. M-way tree
+        2. B tree / B+ Tree - Database Searching
+
+BST (Binary Search Tree)
+----------------------------
+1. purpose - Searching
+2. property - 
+        Left < Root
+        Right > Root
+Creation of BST:
+--------------------
+    - Create BST Examples:
+    - Create a Node class
+        class Node {
+            int value;
+            Node left;
+            Node right;
+
+            public Node(int value) {
+                this.value = value;
+                left = null;
+                right = null;
+            }
+        }
+    - Create BST & Traversal
+    ----------------------------
+class BST {
+    private Node root;
+
+    public BST() {
+        root = null;
+    }
+
+    public void insert(int value) {
+        root = insertRec(root, value);
+    }
+
+    private Node insertRec(Node root, int value) {
+            if (root == null) {
+                root = new Node(value);
+                return root;
+            }
+
+            if (value < root.value) {
+                root.left = insertRec(root.left, value);
+            } else if (value > root.value) {
+                root.right = insertRec(root.right, value);
+            }
+
+            return root;
+        }
+
+        public boolean search(int value) {
+            return searchRec(root, value);
+        }
+
+        private boolean searchRec(Node root, int value) {
+            if (root == null) {
+                return false;
+            }
+
+            if (value == root.value) {
+                return true;
+            } else if (value < root.value) {
+                return searchRec(root.left, value);
+            } else {
+                return searchRec(root.right, value);
+            }
+        }
+
+        public void inorderTraversal() {
+            inorderTraversalRec(root);
+        }
+
+        private void inorderTraversalRec(Node root) {
+            if (root != null) {
+                inorderTraversalRec(root.left);
+                System.out.print(root.value + " ");
+                inorderTraversalRec(root.right);
+            }
+        }
+
+        // Preorder Traversal
+        public void preorderTraversal() {
+            preorderTraversalRec(root);
+        }
+
+        private void preorderTraversalRec(Node root) {
+            if (root != null) {
+                System.out.print(root.value + " ");
+                preorderTraversalRec(root.left);
+                preorderTraversalRec(root.right);
+            }
+        }
+
+        // Postorder Traversal
+        public void postorderTraversal() {
+            postorderTraversalRec(root);
+        }
+
+        private void postorderTraversalRec(Node root) {
+            if (root != null) {
+                postorderTraversalRec(root.left);
+                postorderTraversalRec(root.right);
+                System.out.print(root.value + " ");
+            }
+        }
+}
+
+
+------------------------------------------
+
+Expression Tree
+----------------------
+    - Creation of expression tree
+    ---------------------------------------------------
+    
