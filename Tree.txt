@@ -45,108 +45,49 @@ BST (Binary Search Tree)
 Creation of BST:
 --------------------
     - Create BST Examples:
-    - Create a Node class
-        class Node {
-            int value;
-            Node left;
-            Node right;
-
-            public Node(int value) {
-                this.value = value;
-                left = null;
-                right = null;
-            }
-        }
-    - Create BST & Traversal
-    ----------------------------
-class BST {
-    private Node root;
-
-    public BST() {
-        root = null;
-    }
-
-    public void insert(int value) {
-        root = insertRec(root, value);
-    }
-
-    private Node insertRec(Node root, int value) {
-            if (root == null) {
-                root = new Node(value);
-                return root;
-            }
-
-            if (value < root.value) {
-                root.left = insertRec(root.left, value);
-            } else if (value > root.value) {
-                root.right = insertRec(root.right, value);
-            }
-
-            return root;
-        }
-
-        public boolean search(int value) {
-            return searchRec(root, value);
-        }
-
-        private boolean searchRec(Node root, int value) {
-            if (root == null) {
-                return false;
-            }
-
-            if (value == root.value) {
-                return true;
-            } else if (value < root.value) {
-                return searchRec(root.left, value);
-            } else {
-                return searchRec(root.right, value);
-            }
-        }
-
-        public void inorderTraversal() {
-            inorderTraversalRec(root);
-        }
-
-        private void inorderTraversalRec(Node root) {
-            if (root != null) {
-                inorderTraversalRec(root.left);
-                System.out.print(root.value + " ");
-                inorderTraversalRec(root.right);
-            }
-        }
-
-        // Preorder Traversal
-        public void preorderTraversal() {
-            preorderTraversalRec(root);
-        }
-
-        private void preorderTraversalRec(Node root) {
-            if (root != null) {
-                System.out.print(root.value + " ");
-                preorderTraversalRec(root.left);
-                preorderTraversalRec(root.right);
-            }
-        }
-
-        // Postorder Traversal
-        public void postorderTraversal() {
-            postorderTraversalRec(root);
-        }
-
-        private void postorderTraversalRec(Node root) {
-            if (root != null) {
-                postorderTraversalRec(root.left);
-                postorderTraversalRec(root.right);
-                System.out.print(root.value + " ");
-            }
-        }
-}
-
-
+    - All 3 types of traversal recursive
+    - Find tree height
+    - Find min / max element from tree
+    - insertion of an item using non recursive algorightm
+    - deletion of an item.
 ------------------------------------------
-
 Expression Tree
 ----------------------
     - Creation of expression tree
-    ---------------------------------------------------
-    
+    - Create of expression tree from prefix and postfix
+
+-Creation of BST using prefix/infix and postfix/infix combination
+    Alphabets and numbers tree.
+
+Threaded binary tree
+--------------------
+
+General Tree
+-----------------
+Max Child = M if order = M
+
+MST -> Balanced -> B Tree
+
+Rules for B Tree
+--------------------
+A B-tree is a self-balancing search tree data structure that maintains sorted data and allows efficient operations like search, insert, and delete. It is commonly used in databases and file systems due to its ability to handle large amounts of data efficiently. Here are the rules or properties that define a B-tree:
+
+1. **Root property:** The root of the tree can have a minimum of 1 key value.
+
+2. **Node property:** Each non-root internal node (except leaf nodes) can have a minimum of `ceil(m/2) - 1` key values and a maximum of `m - 1` key values, where `m` is the order of the B-tree.
+
+3. **Leaf property:** All leaf nodes appear at the same level and contain a minimum of `floor(m/2)` key values and a maximum of `m - 1` key values.
+
+4. **Key order property:** For any non-leaf node, the keys in the node are stored in non-decreasing order.
+
+5. **Child property:** For each key value in a non-leaf node, there is a child subtree between two adjacent keys. The key values in the child subtree are greater than the left key and less than or equal to the right key.
+
+6. **Balancing property:** All leaf nodes have the same depth, and the difference in height between any two subtrees is at most 1.
+
+7. **Duplicate keys:** B-trees typically do not allow duplicate keys, but some variations may support it.
+
+These rules ensure that a B-tree maintains a balanced structure, which enables efficient operations. The minimum number of keys in each node helps keep the tree balanced, and the order property ensures efficient searching and insertion.
+
+B-trees provide logarithmic time complexity for search, insert, and delete operations, making them efficient for large datasets. The self-balancing nature of B-trees allows them to handle dynamic changes in the data effectively.
+
+It's important to note that there can be variations in the exact definitions and properties of B-trees, such as B+ trees, which have additional characteristics like storing keys only in the leaf nodes and using a linked list structure for efficient range queries.
