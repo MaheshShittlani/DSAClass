@@ -1,0 +1,353 @@
+In data structures, a graph G(V,E) is a non-linear data structure that consists of a set of vertices (V) (also known as nodes) and a set of edges(E) that connect these vertices. It is used to represent relationships between different entities.
+
+A graph can be visualized as a collection of nodes, where each node represents an entity, and the edges represent the connections or relationships between these entities. The edges can be directed or undirected, meaning they can have a specific direction or be bi-directional.
+
+Graphs are commonly used to model and solve problems that involve networks, such as social networks, computer networks, transportation networks, and more. They provide a flexible and efficient way to represent and analyze complex relationships between entities.
+
+There are various types of graphs, including:
+
+1. Undirected Graph: A graph in which edges have no direction. The relationship between nodes is symmetric.
+
+2. Directed Graph (Digraph): A graph in which edges have a direction. The relationship between nodes is asymmetric.
+
+Grapth Terminology
+-------------------------------
+1. Vertex (or Node): A vertex is a fundamental unit in a graph. It represents an entity or a point in the graph. 
+
+2. Edge: An edge is a connection between two vertices. It represents a relationship or a link between the entities they represent. In an undirected graph, the edges have no specific direction, while in a directed graph, the edges have a specific direction. The edges are represented by lines or arrows connecting the vertices. 
+
+3. Weight: Weight is a value associated with an edge. It represents a property or a cost related to the connection between the vertices. For example, in a transportation network, the weight of an edge can represent the distance or travel time between two locations.
+
+Weighted Graph:
+```
+      A
+    /   \
+   2     5
+  /       \
+ B----3----C
+  \       /
+   4     1
+    \   /
+      D
+```
+
+4. Degree: The degree of a vertex is the number of edges connected to it. In an undirected graph, the degree counts both incoming and outgoing edges, while in a directed graph, the degree can be split into the in-degree (number of incoming edges) and the out-degree (number of outgoing edges).
+
+```
+    A
+   / \
+  B   C
+       \
+        D
+```
+
+In this undirected graph, vertex A has a degree of 2, vertex B has a degree of 1, vertex C has a degree of 2, and vertex D has a degree of 1.
+
+
+6. Adjacency: Adjacency refers to the relationship between two vertices in a graph that are connected by an edge. If there is an edge between two vertices, we say that they are adjacent to each other. In an undirected graph, adjacency is symmetric, meaning that if vertex A is adjacent to vertex B, then vertex B is also adjacent to vertex A. In a directed graph, adjacency can be asymmetric, where an edge connects one vertex as the source to another vertex as the destination.
+
+Example of Adjacency in an Undirected Graph:
+```
+   A-------B
+   |       |
+   |       |
+   C-------D
+```
+In this undirected graph, vertex A is adjacent to vertices B and C. Vertex B is adjacent to vertices A and D. Vertex C is adjacent to vertices A and D. And vertex D is adjacent to vertices B and C.
+
+Example of Adjacency in a Directed Graph:
+```
+   A--->B
+   ^    |
+   |    v
+   C--->D
+```
+In this directed graph, vertex A is adjacent to vertex B, vertex B is adjacent to vertex D, vertex C is adjacent to vertices A and D, and vertex D is adjacent to no other vertices in this example.
+
+7. Incident: Incident refers to the relationship between a vertex and an edge in a graph. If a vertex is connected to an edge, we say that the vertex is incident to that edge. In an undirected graph, an edge is incident to the two vertices it connects. In a directed graph, an edge has a source and a destination vertex, and it is incident to those two vertices.
+
+Example of Incidence in an Undirected Graph:
+```
+   A-------B
+   |       |
+   |       |
+   C-------D
+```
+In this undirected graph, vertex A is incident to edges (A, B) and (A, C). Vertex B is incident to edges (A, B) and (B, D). Vertex C is incident to edges (A, C) and (C, D). Vertex D is incident to edges (B, D) and (C, D).
+
+Example of Incidence in a Directed Graph:
+```
+   A--->B
+   ^    |
+   |    v
+   C--->D
+```
+In this directed graph, vertex A is incident to the outgoing edge (A, B) and the incoming edge (C, A). Vertex B is incident to the incoming edge (A, B) and has no outgoing edges in this example. Vertex C is incident to the outgoing edge (C, D) and the incoming edge (C, A). Vertex D is incident to the incoming edges (B, D) and (C, D).
+
+
+
+7. Path: A path is a sequence of edges that connects a series of vertices. It represents a route or a traversal from one vertex to another in the graph.
+
+```
+    A--->B--->C--->D
+```
+
+In this directed graph, the path from vertex A to D is A -> B -> C -> D.
+
+
+8. Path Length: The path length is the number of edges traversed in a path. It represents the distance or cost associated with traveling between two vertices. In weighted graphs, the path length is the sum of the weights of the edges in the path.
+
+8. Cycle: A cycle is a path in a graph that starts and ends at the same vertex. It forms a closed loop within the graph.
+
+```
+    A--->B--->C--->D
+     ^____________|
+```
+
+In this directed graph, the path A -> B -> C -> D -> A forms a cycle.
+
+
+9. Cyclic Graph: A cyclic graph, also known as a cyclic or circular graph, is a graph that contains at least one cycle. A cycle is a closed path in the graph that starts and ends at the same vertex, traversing through a series of vertices and edges.
+
+Example of a Cyclic Graph:
+```
+     A
+    / \
+   B---C---D
+```
+In this undirected graph, the path A -> B -> C -> A forms a cycle.
+
+11. Acyclic Graph: An acyclic graph, also known as a tree-like graph, is a graph that does not contain any cycles. It is a graph where there are no closed paths, meaning you cannot start at a vertex and follow a series of edges to return to the same vertex.
+
+Example of an Acyclic Graph:
+```
+     A       B
+    / \     /
+   C   D   E
+```
+
+12. Directed Acyclic Graph (DAG): A Directed Acyclic Graph (DAG) is a specific type of directed graph that does not contain any directed cycles. In other words, it is a graph where it is not possible to start at any vertex and follow a series of directed edges to return to the same vertex.
+
+```Example:
+    A --> B --> C
+    |     |
+    v     v
+    D --> E
+```
+
+13. Source
+In the context of a directed graph, a source refers to a vertex that has no incoming edges. It is a vertex from which there are no directed edges pointing towards it. In other words, a source is a vertex that does not have any predecessors
+
+A source vertex is a vertex with an in-degree of zero, meaning it has no incoming edges.
+
+   A ---> B ---> C
+    \           /
+     \         /
+      ---> D <---
+
+In this directed graph, vertex A is a source because it has no incoming edges. It is the starting point of the graph's flow or process. Vertex B, C, and D are not sources because they have incoming edges.
+
+14. Sink
+In the context of a directed graph, a sink refers to a vertex that has no outgoing edges. It is a vertex to which there are no directed edges pointing away from it. In other words, a sink is a vertex that does not have any successors.
+
+A sink vertex is a vertex with an out-degree of zero, meaning it has no outgoing edges.
+
+15. Pendent Vertxe
+A pendent vertex, also known as a pendant vertex or leaf vertex, refers to a vertex in a graph that is connected to only one other vertex. It is a vertex that has a degree of one, meaning it has only one edge connected to it. This edge is often referred to as a pendant edge.
+
+Pendent vertices are characterized by their position at the end of a branch or path within the graph. They are considered the "leaves" of the graph structure, similar to how leaves are found at the end of a tree's branches.
+
+16. Isolated Vertex: if degree of a vertex is 0.
+
+17. successorsand predecessors: In a directed graph, if a vertex v is adjacent to vertex u then v is said to be the successors of u. and u is said to be predecessors of v.
+
+18. Maximum ages in a grpah
+--------------------------------
+    Undirected Graph: n(n-1) / 2
+    Directed Graph: n(n-1)
+
+19. Complete Graph: any vertex in a graph is adjacent to all other vertex of the graph means Maximum edges exist in the graph.
+
+20. Multiple ages. For a pair of vertex there are more then one ages.
+
+21. Loop: An edge is call a self loop if it start and ends with the same vertex.
+
+22. Multigraph: Graph that contains loop or Multiple edges.
+
+23. Simple Grapth: A graph which doesn't have loop or multiple edges.
+
+24. Regular grapth: A graph is called Regular grapth if all vertexes are adjacent to same number of vertices.
+
+25. Null graph: A graph which has only isolated vertices.
+
+26. Connected Graph: A connected graph is a graph in which there is a path between any two vertices. There are no isolated vertices.
+
+```
+      A       B       C
+     /       /       /
+    D       E       F
+   /       /       /
+  G       H       I
+```
+
+In this undirected graph, all the vertices are connected, and there is a path between any two vertices.
+
+27. Disconnected Graph: A disconnected graph is a graph that contains one or more isolated vertices, meaning there is no path from those vertices to any other vertices.
+
+```
+      A       B       C         D
+```
+
+In this undirected graph, vertices A, B, and C are isolated, and there is no path between them.
+
+28. Connected Components
+29. Tree: An undirected grapth T is called tree if ther is no cycle.
+30. Spanning Tree: A spanning tree is a connected, acyclic subgraph that includes all the vertices of the original graph.
+
+Representation of Graph in memory
+--------------------------------------
+In computer memory, graphs can be represented using various data structures. Two commonly used representations are the adjacency matrix and the adjacency list.
+
+1. Adjacency Matrix:
+An adjacency matrix represents a graph using a two-dimensional matrix. The matrix has dimensions N x N, where N is the number of vertices in the graph. Each cell in the matrix represents an edge between two vertices. The value in the cell indicates whether an edge exists or not, typically using 0 and 1 or True and False.
+
+   A---B---C
+   |       |
+   D-------E
+
+```Matrix
+
+    A  B  C  D  E
+A   0  1  0  1  0
+B   1  0  1  0  0
+C   0  1  0  0  1
+D   1  0  0  0  1
+E   0  0  1  1  0
+```
+
+
+Advantages:
+- Checking the presence of an edge between two vertices is efficient in O(1) time.
+- It works well for dense graphs where the number of edges is close to the maximum possible.
+
+Disadvantages:
+- It consumes more memory, O(N^2), even for sparse graphs.
+- Iterating over the neighbors of a vertex can be time-consuming, requiring O(N) time.
+
+2. Adjacency List:
+An adjacency list represents a graph using an array of linked lists. 
+Each element in the array represents a vertex, and the linked list or array associated with each element stores its adjacent vertices.
+
+   A---B---C
+   |       |
+   D-------E
+
+```List
+A: [B, D]
+B: [A, C]
+C: [B, E]
+D: [A, E]
+E: [C, D]
+```
+Advantages:
+- It efficiently represents sparse graphs, consuming memory proportional to the number of vertices and edges.
+- Accessing the neighbors of a vertex is efficient in O(degree) time, where degree is the number of neighbors.
+
+Disadvantages:
+- Checking the presence of an edge between two vertices requires traversing the list or array, taking O(degree) time.
+- It may consume more memory for dense graphs compared to the adjacency matrix representation.
+
+
+Program to create adjacency matrix
+-----------------------------------
+import java.util.Arrays;
+
+public class AdjacencyMatrix {
+    private int[][] adjacencyMatrix;
+    private int numVertices;
+
+    public AdjacencyMatrix(int numVertices) {
+        this.numVertices = numVertices;
+        adjacencyMatrix = new int[numVertices][numVertices];
+    }
+
+    public void addEdge(int src, int dest) {
+        // For an undirected graph, set both positions as 1
+        adjacencyMatrix[src][dest] = 1;
+        adjacencyMatrix[dest][src] = 1;
+    }
+
+    public void displayMatrix() {
+        for (int[] row : adjacencyMatrix) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create a graph with 5 vertices
+        int numVertices = 5;
+        AdjacencyMatrix graph = new AdjacencyMatrix(numVertices);
+
+        // Add edges to the graph
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 3);
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+        graph.addEdge(2, 4);
+        graph.addEdge(3, 4);
+
+        // Display the adjacency matrix
+        graph.displayMatrix();
+    }
+}
+
+
+Adjacency List
+-------------------
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdjacencyList {
+    private List<List<Integer>> adjacencyList;
+    private int numVertices;
+
+    public AdjacencyList(int numVertices) {
+        this.numVertices = numVertices;
+        adjacencyList = new ArrayList<>(numVertices);
+        for (int i = 0; i < numVertices; i++) {
+            adjacencyList.add(new ArrayList<>());
+        }
+    }
+
+    public void addEdge(int src, int dest) {
+        adjacencyList.get(src).add(dest);
+        adjacencyList.get(dest).add(src); // For an undirected graph
+    }
+
+    public void displayList() {
+        for (int i = 0; i < numVertices; i++) {
+            System.out.print("Vertex " + i + " -> ");
+            for (int neighbor : adjacencyList.get(i)) {
+                System.out.print(neighbor + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Create a graph with 5 vertices
+        int numVertices = 5;
+        AdjacencyList graph = new AdjacencyList(numVertices);
+
+        // Add edges to the graph
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 3);
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+        graph.addEdge(2, 4);
+        graph.addEdge(3, 4);
+
+        // Display the adjacency list
+        graph.displayList();
+    }
+}
