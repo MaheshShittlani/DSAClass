@@ -351,3 +351,127 @@ public class AdjacencyList {
         graph.displayList();
     }
 }
+
+
+Graph Traversal
+-----------------------
+Graph traversal refers to the process of visiting all the vertices or edges of a graph in a systematic manner. It involves exploring and examining the graph's vertices and edges to perform various operations, such as searching for specific elements, finding paths or cycles, or analyzing the graph's structure.
+
+There are two commonly used graph traversal techniques: breadth-first search (BFS) and depth-first search (DFS).
+
+1. Breadth-First Search (BFS):
+BFS explores the graph level by level, visiting all the vertices at a given level before moving to the next level. It starts from a specified source vertex and explores its neighboring vertices before moving on to the next level of vertices.
+
+BFS uses a queue data structure to keep track of the vertices to visit next. The steps involved in BFS are as follows:
+
+- Enqueue the source vertex into the queue.
+- While the queue is not empty, do the following:
+  - Dequeue a vertex from the queue.
+  - Process the dequeued vertex (e.g., print, perform desired operations).
+  - Enqueue all unvisited neighboring vertices of the dequeued vertex into the queue.
+  - Mark the dequeued vertex as visited.
+
+BFS guarantees that the shortest path from the source vertex to any other vertex is discovered first.
+
+2. Depth-First Search (DFS):
+DFS explores the graph by going as deep as possible before backtracking. It starts from a specified source vertex and explores its first unvisited neighboring vertex. It continues this process recursively until there are no more unvisited vertices, backtracking as necessary.
+
+DFS uses a stack (or recursion) to keep track of the vertices to visit next. The steps involved in DFS are as follows:
+
+- Push the source vertex onto the stack (or call the recursive DFS function with the source vertex).
+- While the stack is not empty, do the following:
+  - Pop a vertex from the stack.
+  - Process the popped vertex (e.g., print, perform desired operations).
+  - Push all unvisited neighboring vertices of the popped vertex onto the stack (or call the recursive DFS function with each unvisited neighboring vertex).
+  - Mark the popped vertex as visited.
+
+DFS does not guarantee finding the shortest path but is useful for exploring all the vertices in a connected component of a graph.
+
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BFS {
+    private int numVertices;
+    private ArrayList<ArrayList<Integer>> adjacencyList;
+
+    public BFS(int numVertices) {
+        this.numVertices = numVertices;
+        adjacencyList = new ArrayList<>(numVertices);
+
+        for (int i = 0; i < numVertices; i++) {
+            adjacencyList.add(new ArrayList<>());
+        }
+    }
+
+    public void addEdge(int src, int dest) {
+        adjacencyList.get(src).add(dest);
+        adjacencyList.get(dest).add(src); // For an undirected graph
+    }
+
+    public void bfsTraversal(int startVertex) {
+        boolean[] visited = new boolean[numVertices];
+        Queue<Integer> queue = new LinkedList<>();
+
+        visited[startVertex] = true;
+        queue.offer(startVertex);
+
+        while (!queue.isEmpty()) {
+            int currentVertex = queue.poll();
+            System.out.print(currentVertex + " ");
+
+            ArrayList<Integer> neighbors = adjacencyList.get(currentVertex);
+            for (int neighbor : neighbors) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.offer(neighbor);
+                }
+            }
+        }
+    }
+
+    public void dfsTraversal(int startVertex) {
+        boolean[] visited = new boolean[numVertices];
+        Stack<Integer> stack = new Stack<>();
+
+        visited[startVertex] = true;
+        stack.push(startVertex);
+
+        while (!stack.isEmpty()) {
+            int currentVertex = stack.pop();
+            System.out.print(currentVertex + " ");
+
+            ArrayList<Integer> neighbors = adjacencyList.get(currentVertex);
+            for (int neighbor : neighbors) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    stack.push(neighbor);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int numVertices = 7;
+        BFS graph = new BFS(numVertices);
+
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(1, 4);
+        graph.addEdge(2, 5);
+        graph.addEdge(2, 6);
+
+        System.out.print("BFS Traversal: ");
+        graph.bfsTraversal(0);
+    }
+}
+
+Explain Single source shortest path problems
+---------------
+    - Dijkastra's Algorithm
+Explain Spanning Tree
+-----------------------
+    - Kruskal's Algorithm
+    - Prim's Algorithm

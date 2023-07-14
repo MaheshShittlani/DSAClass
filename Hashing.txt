@@ -1,0 +1,231 @@
+Hashing
+-------------------
+
+Hashing is a process of converting input data of any size or length into a fixed-size string of characters, typically a sequence of numbers and letters. This fixed-size string is called a hash value or simply a hash. The input data can be any kind of digital information, such as a text string, a file, or even a larger dataset.
+
+Hashing functions, also known as hash algorithms, are designed to be fast and efficient in generating unique hash values for different input data. They take the input and apply a mathematical algorithm that performs various calculations on the data, resulting in a fixed-size output.
+
+The primary characteristics of a hash function are:
+
+1. Deterministic: For the same input, the hash function will always produce the same hash value.
+2. Fast computation: The hash function should generate the hash value quickly, regardless of the size of the input.
+3. Preimage resistance: Given a hash value, it should be computationally infeasible to determine the original input data.
+4. Collision resistance: It should be highly unlikely for two different inputs to produce the same hash value.
+
+Commonly used hash functions include MD5 (Message Digest Algorithm 5), SHA-1 (Secure Hash Algorithm 1), SHA-256, and bcrypt. 
+
+Hash function
+---------------------
+1. Division (Modulo) method
+2. Folding method
+3. Keysquare method
+
+Collision Resolution Techniques
+------------------------------------
+Open Addressing
+    1. Linear probing
+    A `key` is given. h(key) -> h(k) then data will be stored in the order 
+    h(k) , h(k)+1, h(k) + 2, h(k) + 3
+
+    (h(k) + i) % n => where i = 1,2,3,4.....n and n is the size of array
+
+    2. Quardic probing
+    A `key` is given. h(key) -> h(k) then data will be stored in the order 
+    h(k) + 0^2 , h(k)+ 1^2, h(k) + 2^2, h(k) + 3^2
+
+    (h(k) + i) % n => where i = 1,2,3,4.....n and n is the size of array
+    3. Double Hashing
+        h1(k) + h2(k) => h(k)
+
+public class HashTable {
+    private int size;
+    private Integer[] table;
+
+    public HashTable(int size) {
+        this.size = size;
+        this.table = new Integer[size];
+    }
+
+    private int hashFunction(int key) {
+        return key % size;
+    }
+
+    public void insert(int key) {
+        int index = hashFunction(key);
+        while (table[index] != null) {
+            index = (index + 1) % size;
+        }
+        table[index] = key;
+    }
+
+    public boolean search(int key) {
+        int index = hashFunction(key);
+        while (table[index] != null) {
+            if (table[index] == key) {
+                return true;
+            }
+            index = (index + 1) % size;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        HashTable hashTable = new HashTable(10);
+
+        hashTable.insert(5);
+        hashTable.insert(15);
+        hashTable.insert(25);
+        hashTable.insert(35);
+
+        System.out.println(hashTable.search(15));  // Output: true
+        System.out.println(hashTable.search(10));  // Output: false
+    }
+}
+
+
+public class Employee {
+    private int id;
+    private String name;
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class HashTable {
+    private int size;
+    private Employee[] table;
+
+    public HashTable(int size) {
+        this.size = size;
+        this.table = new Employee[size];
+    }
+
+    private int hashFunction(int key) {
+        return key % size;
+    }
+
+    public void insert(Employee employee) {
+        int index = hashFunction(employee.getId());
+        while (table[index] != null) {
+            index = (index + 1) % size;
+        }
+        table[index] = employee;
+    }
+
+    public Employee search(int id) {
+        int index = hashFunction(id);
+        while (table[index] != null) {
+            if (table[index].getId() == id) {
+                return table[index];
+            }
+            index = (index + 1) % size;
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        HashTable hashTable = new HashTable(10);
+
+        Employee employee1 = new Employee(101, "John");
+        Employee employee2 = new Employee(201, "Jane");
+        Employee employee3 = new Employee(301, "Alice");
+
+        hashTable.insert(employee1);
+        hashTable.insert(employee2);
+        hashTable.insert(employee3);
+
+        int searchId = 201;
+        Employee foundEmployee = hashTable.search(searchId);
+        if (foundEmployee != null) {
+            System.out.println("Employee found: ID = " + foundEmployee.getId() + ", Name = " + foundEmployee.getName());
+        } else {
+            System.out.println("Employee with ID " + searchId + " not found.");
+        }
+    }
+}
+
+Seperate chaining
+-----------------------
+import java.util.LinkedList;
+
+class Employee {
+    private int id;
+    private String name;
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+class HashTable {
+    private int size;
+    private LinkedList<Employee>[] table;
+
+    public HashTable(int size) {
+        this.size = size;
+        this.table = new LinkedList[size];
+    }
+
+    private int hashFunction(int key) {
+        return key % size;
+    }
+
+    public void insert(Employee employee) {
+        int index = hashFunction(employee.getId());
+        if (table[index] == null) {
+            table[index] = new LinkedList<>();
+        }
+        table[index].add(employee);
+    }
+
+    public Employee search(int id) {
+        int index = hashFunction(id);
+        if (table[index] != null) {
+            for (Employee employee : table[index]) {
+                if (employee.getId() == id) {
+                    return employee;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        HashTable hashTable = new HashTable(10);
+
+        Employee employee1 = new Employee(101, "John");
+        Employee employee2 = new Employee(201, "Jane");
+        Employee employee3 = new Employee(301, "Alice");
+
+        hashTable.insert(employee1);
+        hashTable.insert(employee2);
+        hashTable.insert(employee3);
+
+        int searchId = 201;
+        Employee foundEmployee = hashTable.search(searchId);
+        if (foundEmployee != null) {
+            System.out.println("Employee found: ID = " + foundEmployee.getId() + ", Name = " + foundEmployee.getName());
+        } else {
+            System.out.println("Employee with ID " + searchId + " not found.");
+        }
+    }
+}
